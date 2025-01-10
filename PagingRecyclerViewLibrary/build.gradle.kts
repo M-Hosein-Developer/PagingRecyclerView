@@ -44,4 +44,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //paging
+    implementation("androidx.paging:paging-runtime:3.3.2")
+
+    //skeleton shimmer effect
+    implementation("com.ericktijerou.koleton:koleton:1.0.0-beta01")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
 }
