@@ -3,13 +3,20 @@ package ir.androidcoder.pagingrecyclerviewlibrary
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ir.androidcoder.pagingrecyclerviewlibrary.databinding.AndroidcoderPagingRecyclerViewBinding
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs : AttributeSet? = null) :
     ConstraintLayout(context , attrs , 0) {
@@ -44,6 +51,31 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
 
     }
 
+    //adapter
+    fun setAdapter(adapter: PagingDataAdapter<*, *>): PagingRecyclerViewLib {
+
+        binding.prvRecyclerView.adapter = adapter
+
+        adapter.addLoadStateListener { loadState ->
+            when (loadState.refresh) {
+                is LoadState.Loading -> {
+                    Log.v("test load state" , "loading")
+                    binding.prvMain.loadSkeleton()
+                }
+
+                is LoadState.Error -> {
+                    Log.v("test load state" , "error")
+                }
+
+                is LoadState.NotLoading -> {
+                    Log.v("test load state" , "not loading")
+                    binding.prvMain.hideSkeleton()
+                }
+            }
+        }
+
+        return this
+    }
 
     //layout manager
     fun setVerticalLinearLayoutManager(reversLayout : Boolean = false) : PagingRecyclerViewLib {
@@ -87,7 +119,5 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
         binding.prvMain.visibility = visibility
         return this
     }
-
-
 
 }
