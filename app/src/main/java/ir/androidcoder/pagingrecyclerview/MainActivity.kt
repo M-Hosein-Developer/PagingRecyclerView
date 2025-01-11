@@ -1,6 +1,7 @@
 package ir.androidcoder.pagingrecyclerview
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ExampleAdapter()
 
         binding.testPaging.setAdapter(adapter).setVerticalLinearLayoutManager()
-        binding.testPaging1.setAdapter(adapter).setHorizontalLinearLayoutManager()
+        binding.testPaging1.setAdapter(adapter).setHorizontalLinearLayoutManager().getScrollState {  }
 
         viewModel.searchMovies().flow.onEach {
             adapter.submitData(it)

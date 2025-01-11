@@ -5,11 +5,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ir.androidcoder.pagingrecyclerviewlibrary.databinding.AndroidcoderPagingRecyclerViewBinding
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
@@ -119,5 +121,18 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
         binding.prvMain.visibility = visibility
         return this
     }
+
+
+    //scroll
+    fun getScrollState(scrollState :(Int) -> Unit) : PagingRecyclerViewLib{
+        scrollState(binding.prvRecyclerView.scrollState)
+        return this
+    }
+
+    fun setScrollPosition(position : Int) : PagingRecyclerViewLib{
+        binding.prvRecyclerView.scrollToPosition(position)
+        return this
+    }
+
 
 }
