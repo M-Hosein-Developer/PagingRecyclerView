@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ir.androidcoder.traktmovies.view.adapter.basaAdapter.BaseDiffCallback
-import ir.androidcoder.traktmovies.view.adapter.basaAdapter.BasePagingAdapter
+import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BaseDiffCallback
+import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BasePagingAdapter
 
-class ExampleAdapter : BasePagingAdapter<TestModel , ExampleAdapter.ExampleViewHolder>(
+class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHolder>(
     BaseDiffCallback(
         {oldItem, newItem -> oldItem.id == newItem.id},
         {oldItem, newItem -> oldItem == newItem}

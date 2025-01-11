@@ -1,4 +1,4 @@
-package ir.androidcoder.traktmovies.view.adapter.basaAdapter
+package ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter
 
 import androidx.recyclerview.widget.DiffUtil
 
