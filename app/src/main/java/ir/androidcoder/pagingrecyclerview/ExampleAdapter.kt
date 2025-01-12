@@ -20,8 +20,10 @@ class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHo
         fun bind(item: TestModel?) {
 
             val txt = itemView.findViewById<TextView>(R.id.txt)
+            val txtId = itemView.findViewById<TextView>(R.id.txt_id)
 
             txt.text = item?.name
+            txtId.text = item?.id.toString()
 
         }
 

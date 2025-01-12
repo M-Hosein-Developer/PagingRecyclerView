@@ -3,25 +3,19 @@ package ir.androidcoder.pagingrecyclerviewlibrary
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ir.androidcoder.pagingrecyclerviewlibrary.databinding.AndroidcoderPagingRecyclerViewBinding
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs : AttributeSet? = null) :
-    ConstraintLayout(context , attrs , 0) {
+    ConstraintLayout(context, attrs) {
 
     private val binding = AndroidcoderPagingRecyclerViewBinding.inflate(LayoutInflater.from(context) , this , true)
 
@@ -45,8 +39,17 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
 
                 val typedArray = context.obtainStyledAttributes(it , R.styleable.PagingRecyclerView , 0 , 0)
 
+                if (typedArray.getBoolean(
+                        R.styleable.PagingRecyclerView_prv_activatedSkeleton, true
+                    )
+                ) {
+                    prvRecyclerView.loadSkeleton()
+                } else {
+                    prvRecyclerView.hideSkeleton()
+                }
 
 
+                typedArray.recycle()
             }
 
         }
@@ -54,29 +57,36 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
     }
 
     //adapter
-    fun setAdapter(adapter: PagingDataAdapter<*, *>): PagingRecyclerViewLib {
-
+    fun setAdapter(adapter: PagingDataAdapter<*, *> , isActivatedSkeleton : Boolean = true): PagingRecyclerViewLib {
         binding.prvRecyclerView.adapter = adapter
+        addLoadStateListener(isActivatedSkeleton)
+        return this
+    }
 
-        adapter.addLoadStateListener { loadState ->
-            when (loadState.refresh) {
+
+    //load state
+    private fun addLoadStateListener(isActivatedSkeleton: Boolean){
+
+        if (!isActivatedSkeleton){
+            return
+        }
+
+        (binding.prvRecyclerView.adapter as? PagingDataAdapter<* , *>)?.addLoadStateListener { loadState: CombinedLoadStates ->
+            when (loadState.source.refresh) {
                 is LoadState.Loading -> {
-                    Log.v("test load state" , "loading")
-                    binding.prvMain.loadSkeleton()
+                    binding.prvRecyclerView.loadSkeleton()
                 }
 
                 is LoadState.Error -> {
-                    Log.v("test load state" , "error")
+                    binding.prvRecyclerView.hideSkeleton()
                 }
 
                 is LoadState.NotLoading -> {
-                    Log.v("test load state" , "not loading")
-                    binding.prvMain.hideSkeleton()
+                    binding.prvRecyclerView.hideSkeleton()
                 }
             }
         }
 
-        return this
     }
 
     //layout manager
