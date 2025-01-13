@@ -1,6 +1,6 @@
 # Paging Recycler View
 
-This library is for using the paging and skeleton in the project.
+This library is designed to make paging and skeletons easier to use together.
 
   
 ## Features
