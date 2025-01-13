@@ -10,6 +10,8 @@ import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ir.androidcoder.pagingrecyclerviewlibrary.databinding.AndroidcoderPagingRecyclerViewBinding
 import koleton.api.hideSkeleton
 import koleton.api.loadSkeleton
@@ -121,9 +123,19 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
         return this
     }
 
+    fun setVerticalStaggeredGridLayoutManager(spaceCount : Int) : PagingRecyclerViewLib{
+        binding.prvRecyclerView.layoutManager = StaggeredGridLayoutManager(spaceCount , RecyclerView.VERTICAL)
+        return this
+    }
+
+    fun setHorizontalStaggeredGridLayoutManager(spaceCount : Int) : PagingRecyclerViewLib{
+        binding.prvRecyclerView.layoutManager = StaggeredGridLayoutManager(spaceCount , RecyclerView.HORIZONTAL)
+        return this
+    }
+
 
     //item size
-    fun setMaxItemSize(width : Int , height : Int) : PagingRecyclerViewLib {
+    fun setItemSize(width : Int , height : Int) : PagingRecyclerViewLib {
         binding.apply {
             prvRecyclerView.layoutParams.width = width
             prvRecyclerView.layoutParams.height = height
@@ -136,6 +148,25 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
         return this
     }
 
+    fun setItemViewCacheSize(size : Int) : PagingRecyclerViewLib{
+        binding.prvRecyclerView.setItemViewCacheSize(size)
+        return this
+    }
+
+    //scroll
+    fun smoothScrollToPosition(position : Int) : PagingRecyclerViewLib{
+        binding.prvRecyclerView.scrollToPosition(position)
+        return this
+    }
+
+    //padding
+    fun recyclerPadding(clipToPadding : Boolean = false , top : Int = 0 , bottom : Int = 0 , left : Int = 0 , right : Int = 0) : PagingRecyclerViewLib{
+        binding.apply {
+            prvRecyclerView.clipToPadding = clipToPadding
+            prvRecyclerView.setPadding(left , top , right , bottom)
+        }
+        return this
+    }
 
     //visibility
     fun setItemVisibility(visibility : Int) : PagingRecyclerViewLib {
@@ -154,6 +185,8 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
         binding.prvRecyclerView.scrollToPosition(position)
         return this
     }
+
+
 
 
 }
