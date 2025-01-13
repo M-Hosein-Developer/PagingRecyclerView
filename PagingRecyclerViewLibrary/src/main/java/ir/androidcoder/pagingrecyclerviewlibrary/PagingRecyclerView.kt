@@ -92,17 +92,4 @@ class PagingRecyclerView @JvmOverloads constructor(context : Context, attrs : At
     //recycler
     fun getRecyclerView() : RecyclerView = recyclerView
 
-    /**
-     * Updates the skeleton state by re-adding the load state listener if necessary
-     */
-    private fun updateSkeletonState() {
-        if (skeletonEnable) {
-            addLoadStateListener()
-        } else {
-            recyclerView.hideSkeleton()
-        }
-    }
-
-
-
 }
