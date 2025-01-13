@@ -47,8 +47,7 @@ Add paging dependencies in buil.gradle(Module: app)
 implementation("androidx.paging:paging-runtime:3.3.2")
 ```
 
-Create Paging adapter and extent BasePagingAdapter
-....BasePagingAdapter is exist in library
+Create Paging adapter and inheritance BasePagingAdapter - The BasePagingAdapter is available in the library.
 ```
 class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHolder>(
     BaseDiffCallback(
@@ -84,13 +83,12 @@ Use Another Attributes Of Recyceler View
 ```
 binding.pagingRecyclerView.getRecyclerView().itemAnimator ...
 binding.pagingRecyclerView.getRecyclerView().scrollState ...
- binding.pagingRecyclerView.getRecyclerView().isAnimating ...
+binding.pagingRecyclerView.getRecyclerView().isAnimating ...
 .
 .
 .
 
 ```
-
 
 
 ## License
