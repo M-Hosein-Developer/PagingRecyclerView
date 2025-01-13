@@ -2,10 +2,12 @@
 
 This library is for using the paging and skeleton in the project.
 
+  
 ## Features
 - Easy implementation of paging
 - Use skeleton with paging
 
+  
 ## Installation
 You can add the library to your project via Gradle:
 
@@ -42,11 +44,13 @@ XML Example for Attributes
 ## Usage Kotlin
 Kotlin Example for Attributes
 
+ 
 Add paging dependencies in buil.gradle(Module: app)
 ```
 implementation("androidx.paging:paging-runtime:3.3.2")
 ```
 
+ 
 Create Paging adapter and inheritance BasePagingAdapter - The BasePagingAdapter is available in the library.
 ```
 class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHolder>(
@@ -59,14 +63,16 @@ class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHo
     .
     .
 }
-```
+``` 
 
+ 
 Set Adapter
 ```
 val adapter = ExampleAdapter()
 binding.pagingRecyclerView.setAdapter(adapter)
 ```
 
+ 
 Set Layout Manager
 ```
 binding.pagingRecyclerView
@@ -74,11 +80,13 @@ binding.pagingRecyclerView
             .setLayoutManager(YOUR LAYOUT MANAGER)
 ```
 
+ 
 Set Enable Or Disable Skeleton
 ```
 binding.pagingRecyclerView.skeletonEnable = true or false
 ```
 
+ 
 Use Another Attributes Of Recyceler View
 ```
 binding.pagingRecyclerView.getRecyclerView().itemAnimator ...
@@ -90,6 +98,7 @@ binding.pagingRecyclerView.getRecyclerView().isAnimating ...
 
 ```
 
+ 
 
 ## License
 MIT License
