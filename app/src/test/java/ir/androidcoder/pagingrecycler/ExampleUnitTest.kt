@@ -1,4 +1,4 @@
-package ir.androidcoder.pagingrecyclerview
+package ir.androidcoder.pagingrecycler
 
 import org.junit.Test
 

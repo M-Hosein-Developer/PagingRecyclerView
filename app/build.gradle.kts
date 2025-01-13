@@ -57,5 +57,6 @@ dependencies {
     //skeleton shimmer effect
     implementation("com.ericktijerou.koleton:koleton:1.0.0-beta01")
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 }

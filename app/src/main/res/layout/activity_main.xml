@@ -5,20 +5,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="ir.androidcoder.pagingrecycler.MainActivity">
 
-    <ir.androidcoder.pagingrecyclerviewlibrary.PagingRecyclerViewLib
+    <ir.androidcoder.pagingrecyclerviewlibrary.PagingRecyclerView
         android:id="@+id/test_paging"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:prv_activatedSkeleton="false"
+        app:prv_activatedSkeleton="true"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ir.androidcoder.pagingrecyclerviewlibrary.PagingRecyclerViewLib
+    <ir.androidcoder.pagingrecyclerviewlibrary.PagingRecyclerView
         android:id="@+id/test_paging1"
         android:layout_width="0dp"
         android:layout_marginTop="70dp"

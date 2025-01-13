@@ -1,10 +1,13 @@
-package ir.androidcoder.pagingrecyclerview
+package ir.androidcoder.pagingrecycler
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ir.androidcoder.pagingrecyclerview.R
 import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BaseDiffCallback
 import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BasePagingAdapter
 
@@ -21,9 +24,13 @@ class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHo
 
             val txt = itemView.findViewById<TextView>(R.id.txt)
             val txtId = itemView.findViewById<TextView>(R.id.txt_id)
+            val img = itemView.findViewById<ImageView>(R.id.img)
 
             txt.text = item?.name
             txtId.text = item?.id.toString()
+            Glide.with(img.context)
+                .load(item?.image)
+                .into(img)
 
         }
 

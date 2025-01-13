@@ -1,8 +1,7 @@
-package ir.androidcoder.pagingrecyclerview
+package ir.androidcoder.pagingrecycler
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import kotlinx.coroutines.delay
 
 class TestPagingSource(private val response : List<TestModel>) : PagingSource<Int, TestModel>() {
 
