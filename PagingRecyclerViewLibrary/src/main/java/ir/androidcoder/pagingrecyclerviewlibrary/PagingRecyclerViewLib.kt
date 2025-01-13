@@ -39,11 +39,22 @@ class PagingRecyclerViewLib @JvmOverloads constructor(context : Context, attrs :
 
                 val typedArray = context.obtainStyledAttributes(it , R.styleable.PagingRecyclerView , 0 , 0)
 
-                if (typedArray.getBoolean(
-                        R.styleable.PagingRecyclerView_prv_activatedSkeleton, true
-                    )
-                ) {
-                    prvRecyclerView.loadSkeleton()
+                if (typedArray.getBoolean(R.styleable.PagingRecyclerView_prv_activatedSkeleton, true)) {
+                    (prvRecyclerView.adapter as? PagingDataAdapter<* , *>)?.addLoadStateListener { loadState: CombinedLoadStates ->
+                        when (loadState.source.refresh) {
+                            is LoadState.Loading -> {
+                                binding.prvRecyclerView.loadSkeleton()
+                            }
+
+                            is LoadState.Error -> {
+                                binding.prvRecyclerView.hideSkeleton()
+                            }
+
+                            is LoadState.NotLoading -> {
+                                binding.prvRecyclerView.hideSkeleton()
+                            }
+                        }
+                    }
                 } else {
                     prvRecyclerView.hideSkeleton()
                 }
