@@ -15,7 +15,7 @@ Step 1. Add the JitPack repository to your build file
 ```
 allprojects {
     repositories {
-        maven { url 'https://jitpack.io' }
+        maven { setUrl("https://jitpack.io") }
     }
 }
 ```
@@ -23,7 +23,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation("com.github.M-Hosein-Developer:PagingRecyclerView:1.0.2")
+    implementation("com.github.M-Hosein-Developer:PagingRecyclerView:1.0.3")
 }
 ```
 [![](https://jitpack.io/v/M-Hosein-Developer/PagingRecyclerView.svg)](https://jitpack.io/#M-Hosein-Developer/PagingRecyclerView)
@@ -35,7 +35,7 @@ XML Example for Attributes
         android:id="@+id/paging_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:prv_activatedSkeleton="true"
+        app:prv_activatedSkeleton="true or false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
