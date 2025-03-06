@@ -16,7 +16,7 @@ android {
         minSdk = 21
 
         group = "com.github.M-Hosein-Developer"
-        version = "1.0.3"
+        version = "1.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -71,10 +71,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //paging
-    implementation("androidx.paging:paging-runtime:3.3.2")
+    implementation(libs.androidx.paging.runtime)
 
     //skeleton shimmer effect
-    implementation("com.ericktijerou.koleton:koleton:1.0.0-beta01")
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation(libs.koleton)
+    implementation(libs.shimmer)
 
 }

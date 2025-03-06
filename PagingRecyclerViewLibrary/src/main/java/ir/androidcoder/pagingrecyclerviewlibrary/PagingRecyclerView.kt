@@ -3,15 +3,11 @@ package ir.androidcoder.pagingrecyclerviewlibrary
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.paging.CombinedLoadStates
-import androidx.paging.LoadState
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import koleton.api.hideSkeleton
-import koleton.api.loadSkeleton
+import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BasePagingAdapter
+
 
 class PagingRecyclerView @JvmOverloads constructor(context : Context, attrs : AttributeSet? = null) : ConstraintLayout(context, attrs) {
 
@@ -22,19 +18,16 @@ class PagingRecyclerView @JvmOverloads constructor(context : Context, attrs : At
         )
     }
 
-    var skeletonEnable: Boolean = true
+    private var skeletonEnableXml: Boolean = true
         set(value) {
             field = value
-            addLoadStateListener()
         }
         get() = field
-
 
     init {
         addView(recyclerView)
         initAttributes(attrs)
     }
-
 
     @SuppressLint("Recycle", "CustomViewStyleable")
     private fun initAttributes(attrs: AttributeSet?){
@@ -50,7 +43,7 @@ class PagingRecyclerView @JvmOverloads constructor(context : Context, attrs : At
 
                 val typedArray = context.obtainStyledAttributes(it , R.styleable.PagingRecyclerView , 0 , 0)
 
-                skeletonEnable = typedArray.getBoolean(R.styleable.PagingRecyclerView_prv_activatedSkeleton, true)
+                skeletonEnableXml = typedArray.getBoolean(R.styleable.PagingRecyclerView_prv_activatedSkeleton, true)
 
                 typedArray.recycle()
             }
@@ -60,27 +53,11 @@ class PagingRecyclerView @JvmOverloads constructor(context : Context, attrs : At
     }
 
     //adapter
-    fun setAdapter(adapter: PagingDataAdapter<*, *>): PagingRecyclerView {
-        recyclerView.adapter = adapter
-        addLoadStateListener()
-        return this
-    }
-
-
-    //load state
-    private fun addLoadStateListener(){
-
-        if (!skeletonEnable) return
-
-        (recyclerView.adapter as? PagingDataAdapter<* , *>)?.addLoadStateListener { loadState: CombinedLoadStates ->
-            when (loadState.source.refresh) {
-                is LoadState.Loading -> recyclerView.loadSkeleton()
-
-                is LoadState.Error -> Log.e("Load state error" , " -> error")
-
-                is LoadState.NotLoading -> recyclerView.hideSkeleton()
-            }
+    fun setAdapter(adapter: BasePagingAdapter<*, *>): PagingRecyclerView {
+        recyclerView.adapter = adapter.apply {
+            skeletonEnable = skeletonEnableXml
         }
+        return this
     }
 
     //layout manager

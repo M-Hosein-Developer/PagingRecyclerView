@@ -8,14 +8,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.androidcoder.pagingrecyclerview.R
+import ir.androidcoder.pagingrecyclerviewlibrary.PagingRecyclerView
 import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BaseDiffCallback
 import ir.androidcoder.pagingrecyclerviewlibrary.basaAdapter.BasePagingAdapter
 
-class ExampleAdapter : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHolder>(
-    BaseDiffCallback(
+class ExampleAdapter(private val recyclerView: PagingRecyclerView) : BasePagingAdapter<TestModel, ExampleAdapter.ExampleViewHolder>(
+    diffCallback = BaseDiffCallback(
         {oldItem, newItem -> oldItem.id == newItem.id},
         {oldItem, newItem -> oldItem == newItem}
-    )
+    ),
+    recyclerView = recyclerView,
+    R.layout.item_layout
 ) {
 
 

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModel()
 
-        val adapter = ExampleAdapter()
+        val adapter = ExampleAdapter(binding.testPaging)
 
         binding.testPaging
             .setAdapter(adapter)
